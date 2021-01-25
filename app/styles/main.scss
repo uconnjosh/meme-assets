@@ -50,6 +50,7 @@ h1,h2,h3,h4,h5,h5 {
 .container {
   padding-top: 3rem;
   padding-bottom: 3rem;
+  min-height: 100vh;
 }
 
 .container-narrow > hr {
