@@ -109,18 +109,18 @@ function html() {
       removeScriptTypeAttributes: true,
       removeStyleLinkTypeAttributes: true
     })))
-    .pipe(dest('dist'));
+    .pipe(dest('docs'));
 }
 
 function images() {
   return src('app/images/**/*', { since: lastRun(images) })
     .pipe($.imagemin())
-    .pipe(dest('dist/images'));
+    .pipe(dest('docs/images'));
 };
 
 function fonts() {
   return src('app/fonts/**/*.{eot,svg,ttf,woff,woff2}')
-    .pipe($.if(!isProd, dest('.tmp/fonts'), dest('dist/fonts')));
+    .pipe($.if(!isProd, dest('.tmp/fonts'), dest('docs/fonts')));
 };
 
 function extras() {
@@ -129,15 +129,15 @@ function extras() {
     '!app/*.html'
   ], {
     dot: true
-  }).pipe(dest('dist'));
+  }).pipe(dest('docs'));
 };
 
 function clean() {
-  return del(['.tmp', 'dist'])
+  return del(['.tmp', 'docs'])
 }
 
 function measureSize() {
-  return src('dist/**/*')
+  return src('docs/**/*')
     .pipe($.size({title: 'build', gzip: true}));
 }
 
@@ -201,7 +201,7 @@ function startDistServer() {
     notify: false,
     port,
     server: {
-      baseDir: 'dist',
+      baseDir: 'docs',
       routes: {
         '/node_modules': 'node_modules'
       }
